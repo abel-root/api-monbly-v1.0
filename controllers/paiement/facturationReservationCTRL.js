@@ -11,6 +11,7 @@ const facturationReservationCTRL = async (req, res) => {
 
         // Vérification si le paiement a déjà été effectué pour cette reservation
 
+            
         const paiement=await Paiement.findOne({
             where:{
                 reservationId:reservation.id

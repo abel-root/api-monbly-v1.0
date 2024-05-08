@@ -5,6 +5,7 @@ const afficherToutesReservationPourVoyageurControllers=async(req,res)=>{
     const page = parseInt(req.query.page) || 1;
     const sortBy = req.query.sortBy || "ASC";
     const offset = (page - 1) * limit;
+    
     await Reservevation.findAll({
         include:["paiement"],
         where:{
