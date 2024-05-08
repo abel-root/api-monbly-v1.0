@@ -29,7 +29,10 @@ module.exports = (sequelize, DataTypes) => {
     vehiculeId:DataTypes.INTEGER,
     place_restantes:DataTypes.INTEGER,
     place_occupees:DataTypes.INTEGER,
-    nombre_places:DataTypes.INTEGER
+    nombre_places:DataTypes.INTEGER,
+    address_recuperation:DataTypes.STRING,
+    address_depot:DataTypes.STRING
+
   }, {
     sequelize,
     modelName: 'Trajet',

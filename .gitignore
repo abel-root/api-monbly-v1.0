@@ -14,7 +14,6 @@ web_modules/
 .npm
 
 
-
 # dotenv environment variable files
 .env
 .env.development.local

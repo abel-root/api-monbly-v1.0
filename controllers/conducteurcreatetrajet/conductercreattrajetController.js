@@ -28,7 +28,9 @@ const conductercreattrajetController=async(req,res)=>{
          date: req.body.date,
          heure: req.body.heure,
          montant: req.body.montant,
-         distance: req.body.distance
+         distance: req.body.distance,
+         address_depot:req.body.address_depot,
+         address_recuperation:req.body.address_recuperation
      };
 
      const vehicule=await Vehicule.findOne({

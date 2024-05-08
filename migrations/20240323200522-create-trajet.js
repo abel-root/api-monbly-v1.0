@@ -59,6 +59,13 @@ module.exports = {
         type: Sequelize.INTEGER,
         defaultValue:0
       },
+      address_recuperation:{
+          type: Sequelize.STRING
+      }
+      ,
+      address_depot:{
+          type: Sequelize.STRING
+      },
       createdAt: {
         type: Sequelize.DATE
       },

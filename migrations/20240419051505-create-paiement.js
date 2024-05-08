@@ -26,12 +26,12 @@ module.exports = {
       },
       reservationId:{
           type: Sequelize.INTEGER,
-        onDelete: 'CASCADE',
-        references: {
-          model: 'Reservevation',
-          key: 'id',
-          as: 'reservationId',
-        }
+          onDelete: 'CASCADE',
+          references: {
+            model: 'Reservevation',
+            key: 'id',
+            as: 'reservationId',
+          }
       },
       createdAt: {
         allowNull: false,

@@ -6,6 +6,33 @@ const { ValidationError } = require('sequelize');
 
 const controllerRegister=async(req,res)=>{
 
+    //vérification si le numéro den téléphone exixte déjà.
+ const verifyUserTels=  await User.findOne({
+        where:{
+            tels: req.body.tels
+        }
+    })
+
+    if(verifyUserTels){
+        const message=`Le numéro de téléphone que vous avez enregiustrer existe déjà !`
+        return res.status(400).json({message});
+    }
+
+
+    //Vérification si l'email est unique 
+
+    const verifyUserEmail=await User.findOne({
+        where:{
+            email:req.body.email
+        }
+    })
+    
+    if(verifyUserEmail){
+        const message=`Cet email est déjà associé à un autre compte !`
+        return res.status(400).json({message});
+    }
+
+
     try {
         const userData = {
             nom: req.body.nom,
