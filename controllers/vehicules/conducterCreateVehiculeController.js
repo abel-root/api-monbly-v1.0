@@ -45,7 +45,11 @@ const conducterCreateVehiculeController=async(req,res)=>{
     
         // Mettre à jour les trajets avec le nouvel ID du véhicule
         await Trajet.update(
-            { vehiculeId: vehicule.id },
+            { 
+                vehiculeId: vehicule.id,
+                place_restantes:vehicule.nb_places,
+                nombre_places:vehicule.nb_places
+             },
             { where: { userId: conducterId, vehiculeId: null } }
         );
     

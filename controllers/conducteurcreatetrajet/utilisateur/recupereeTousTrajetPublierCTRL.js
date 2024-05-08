@@ -10,11 +10,16 @@ const recupereeTousTrajetPublierCTRL=async(req,res)=>{
     const  sortBy=req.query.sortBy || "ASC"
     const offset=( page - 1 ) * limit;
     //console.log(heure,date)
+
     let whereClause = {};
+
+    // Condition pour récupérer les trajets avec vehiculeId différent de null
+    whereClause.vehiculeId = { [Op.not]: null };
     
     if(depart==null && arrivee==null && place==null && date==null){
         await Trajet.findAll({
             include:["user","vehicule"],
+            where:whereClause,
             limit:parseInt(limit),
             offset:offset,
             order:[['depart', sortBy], ['arrivee', sortBy], ['date', sortBy], ['heure', sortBy]]

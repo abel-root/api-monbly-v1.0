@@ -34,6 +34,9 @@ require('../back_end/routes/register/admingetOneuser')(app);
 require('../back_end/routes/register/updateuserinfo')(app);
 require('../back_end/routes/register/deleteuser')(app);
 
+// update user password
+require('../back_end/routes/register/modifyPassword')(app)
+
 /*==========================================
             Trajet endPoint
 ===========================================*/
