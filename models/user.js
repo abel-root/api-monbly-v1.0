@@ -34,7 +34,10 @@ module.exports = (sequelize, DataTypes) => {
     profil: DataTypes.ENUM('voyageur','conducteur','admin'),
     genre: DataTypes.STRING,
     email: DataTypes.STRING,
-    password: DataTypes.STRING,
+    password: {
+      type:DataTypes.STRING,
+      allowNull:false
+    },
     pays: DataTypes.STRING,
     tels: DataTypes.STRING,
     dateNaissance: DataTypes.STRING,

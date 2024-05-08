@@ -32,6 +32,13 @@ const controllerRegister=async(req,res)=>{
         return res.status(400).json({message});
     }
 
+     if (!/^\d{4}$/.test(req.body.password)) {
+         return res.status(400).json({message: "Le mot de passe doit être composé de 4 chiffres."})
+      }
+
+      if (/(.).*\1/.test(req.body.password)) {
+        return res.status(400).json({message: 'Le mot de passe ne doit pas contenir de chiffres répétés.'})
+      }
 
     try {
         const userData = {
