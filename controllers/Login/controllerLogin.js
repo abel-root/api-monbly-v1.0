@@ -1,8 +1,8 @@
 const {User}=require('../../models');
 const bcrypt=require('bcrypt');
 const jwt=require('jsonwebtoken')
+const privateKey=require('../../auth/private_key')
 const controllerLogin=async(req,res)=>{
-    const privateKey="TOKEN_KEY_MONBLY_2024_AGREE"
     await User.findOne({
          where:{
             tels:req.body.tels

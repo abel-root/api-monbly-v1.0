@@ -1,0 +1,1 @@
+module.exports='TOKEN_KEY_MONBLY_2024_AGREE'
