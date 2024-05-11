@@ -1,4 +1,5 @@
 const express =require('express');
+require('dotenv').config();
 const normalizePort = require('./outils/normalizePort');
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -6,6 +7,7 @@ const cors = require("cors");
 
 const app=express();
 
+const ENV_DEV=process.env.ENV_DEV || "developement"
 //middleware
 app
     .use(express.json())
@@ -98,8 +100,17 @@ require('../back_end/routes/AvisSurConducteur/recupereeTousAvis')(app)
 ===========================================*/
 require('../back_end/routes/paiement/facturationReservation')(app);
 
+
+
+
+/* Error handler middleware */
+app.use(({res}) => {
+    const message = 'Impossible de trouver la ressource demandée ! Vous pouvez essayer une autre URL.'
+      res.status(404).json({message,donnees:{satusCode:404}});
+  });
+
    //port
 const port =normalizePort(process.env.PORT || 2912)
 
-//server
+//lencement du server
 app.listen(port, console.log(`Le serveur est connecté avec succès sur le port ${port}`));

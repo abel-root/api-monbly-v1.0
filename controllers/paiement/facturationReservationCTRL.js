@@ -10,7 +10,7 @@ const facturationReservationCTRL = async (req, res) => {
         const reservation = await Reservevation.findByPk(parseInt(reservationId));
 
         // Vérification si le paiement a déjà été effectué pour cette reservation
-
+        
             
         const paiement=await Paiement.findOne({
             where:{
