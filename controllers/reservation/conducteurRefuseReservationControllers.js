@@ -1,4 +1,4 @@
-const {Reservevation}=require('../../models')
+const {Reservevation,Trajet}=require('../../models')
 const conducteurRefuseReservationControllers=async(req,res)=>{
     const {id}=req.params;
 
@@ -9,10 +9,25 @@ const conducteurRefuseReservationControllers=async(req,res)=>{
         },
             { where: { id: parseInt(id) } }
         );
-    
+
+        const reservation= await Reservevation.findOne({
+            where:
+                {id:parseInt(id)}
+            
+        })
+
+        const trajet = await Trajet.findByPk(parseInt(reservation.trajet_id));
         if (updatedRows > 0) {
+            await Trajet.update({
+                place_occupees: trajet.place_occupees - reservation.nombresPlace,
+                place_restantes: trajet.place_restantes + reservation.nombresPlace 
+            }, {
+                where: {
+                    id: trajet.id
+                }
+            });
             const message = `Réservation refusée avec succès.`;
-            res.status(200).json({ message });
+            res.status(200).json({ message,donnees: reservation});
         } else {
             const message = `La réservation avec l'ID ${id} n'existe pas.`;
             res.status(404).json({ message });
