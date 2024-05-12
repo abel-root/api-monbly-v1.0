@@ -1,4 +1,4 @@
-const {Reservevation,Vehicule,Trajet, Paiement}=require('../../models')
+const {Reservevation,Vehicule,Trajet}=require('../../models')
 const userfaitunereservationControllers=async(req,res)=>{
     const { voyageurId, trajetId, vehiculeId } = req.params;
     const { nombresPlace } = req.body;

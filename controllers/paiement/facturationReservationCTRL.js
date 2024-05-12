@@ -1,8 +1,10 @@
-const { Paiement, Reservevation, Trajet, User } = require('../../models');
+const { Paiement, Reservevation, Trajet, User,Recue } = require('../../models');
 const jwt = require('jsonwebtoken');
+const numeroRecue = require('../../numeroRecue');
 
 const facturationReservationCTRL = async (req, res) => {
     const { voyageurId, reservationId } = req.params;
+
     const privateKey = "TOKEN_KEY_MONBLY_2024_PAIE";
 
     try {
@@ -54,6 +56,17 @@ const facturationReservationCTRL = async (req, res) => {
             type: req.body.type || "mobil"
         });
 
+        if(paie){
+            await Recue.create({
+                conducteurId: conducteur.id,
+                reservationId:reservation.id,
+                montantHorsTaxe:paie.montantTotal,
+                montantTVA:paie.montantTotal*0.18,
+                montantTTC: paie.montantTotal+ (paie.montantTotal*0.18),
+                numeroRecu:numeroRecue(paie.montantTotal,voyageurId),
+                voyageurId:voyageurId
+            });
+        }
         // mise en place du token permettant de payer le conducteur
 
         const montantTotalConducteur = paie.montantTotal - (paie.montantTotal * 0.15);
@@ -68,12 +81,12 @@ const facturationReservationCTRL = async (req, res) => {
             privateKey,
             { expiresIn: '0.05h' }
         );
-
+        
         const message = `Initialisation de la facturation du trajet.`;
         res.status(201).json({ message, donnees: paie, privateKey,paieToken });
     } catch (err) {
         const message = `Échec de facturation !`;
-        res.status(500).json({ message, donnees: err });
+        res.status(500).json({ message, donnees: err.message });
     }
 }
 

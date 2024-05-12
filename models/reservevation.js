@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       Reservevation.belongsTo(models.User, {as: "voyageur", foreignKey: "userId"});
       Reservevation.belongsTo(models.Trajet, {  as: "trajet", foreignKey: "trajet_id"});
       Reservevation.hasOne(models.Paiement, {  as: "paiement", foreignKey: "reservationId"})
+      Reservevation.hasOne(models.Recue,{as: "recue", foreignKey: "reservationId"})
     }
   }
   Reservevation.init({

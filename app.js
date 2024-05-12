@@ -101,7 +101,10 @@ require('../back_end/routes/AvisSurConducteur/recupereeTousAvis')(app)
 require('../back_end/routes/paiement/facturationReservation')(app);
 
 
-
+/*==========================================
+            Paiement endPoint
+===========================================*/
+require('../back_end/routes/recus/recupereeRecue')(app);
 
 /* Error handler middleware */
 app.use(({res}) => {
