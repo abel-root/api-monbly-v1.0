@@ -3,6 +3,6 @@ const controllerUserPiece = require("../../../controllers/piece/contollerUserPie
 const upload=require('../../../upload')
 
 const UserAjoutePieceIdentite=(app)=>{
-    app.post("/monbly/identite/:userId",upload.fields([{ name: 'recto', maxCount: 1 }, { name: 'verso', maxCount: 1 }]),auth,controllerUserPiece);
+    app.post("/v1/identite/:userId",upload.fields([{ name: 'recto', maxCount: 1 }, { name: 'verso', maxCount: 1 }]),auth,controllerUserPiece);
 }
 module.exports=UserAjoutePieceIdentite;

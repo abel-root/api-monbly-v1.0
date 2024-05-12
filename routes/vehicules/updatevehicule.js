@@ -3,6 +3,6 @@ const updatevehiculeControllers = require("../../controllers/vehicules/updateveh
 const upload = require("../../upload")
 
 const updatevehicule=(app)=>{
-    app.put('/monbly/:conducteurId/vehicule/:id',auth,upload.single('imageVehicule'),updatevehiculeControllers)
+    app.put('/v1/:conducteurId/vehicule/:id',auth,upload.single('imageVehicule'),updatevehiculeControllers)
 }
 module.exports=updatevehicule

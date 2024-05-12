@@ -1,5 +1,5 @@
 const controllerLogin=require("../../controllers/Login/controllerLogin")
 const Login =(app)=>{
-    app.post('/monbly/login',controllerLogin);
+    app.post('/v1/login',controllerLogin);
 }
 module.exports=Login;

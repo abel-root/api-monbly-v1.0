@@ -3,6 +3,6 @@ const updateUserImageControllers = require("../../../controllers/imageProfile/up
 const upload = require("../../../upload");
 
 const updateUserImage=(app)=>{
-    app.put('/monbly/user/:userId/profil/:id',auth,upload.single("profil"),updateUserImageControllers)
+    app.put('/v1/user/:userId/profil/:id',auth,upload.single("profil"),updateUserImageControllers)
 }
 module.exports=updateUserImage;

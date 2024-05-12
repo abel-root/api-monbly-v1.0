@@ -3,6 +3,6 @@ const conducterCreateVehiculeController = require("../../controllers/vehicules/c
 const upload = require("../../upload");
 
 const conducterCreateVehicule=(app)=>{
-    app.post('/monbly/:conducterId/vehicule',auth,upload.single("imageVehicule"),conducterCreateVehiculeController)
+    app.post('/v1/:conducterId/vehicule',auth,upload.single("imageVehicule"),conducterCreateVehiculeController)
 }
 module.exports=conducterCreateVehicule;
