@@ -30,7 +30,7 @@ const controllerLogin=async(req,res)=>{
                );
  
                const message = `L'utilisateur a été connecté avec succès !`;
-               return res.status(200).json({ message, token:token });
+               return res.status(200).json({ message, access_token:token });
          })
      }).catch((error) => {
          const message = `Une erreur s'est produite lors de la recherche de l'utilisateur.`;

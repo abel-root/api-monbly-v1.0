@@ -1,13 +1,19 @@
 const express =require('express');
+
 require('dotenv').config();
 const normalizePort = require('./outils/normalizePort');
 const bodyParser = require("body-parser");
 const cors = require("cors");
-
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUI = require('swagger-ui-express');
+const { swaggerOptions } = require('./swagger');
 
 const app=express();
 
-const ENV_DEV=process.env.ENV_DEV || "developement"
+//swagger doc
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+
 //middleware
 app
     .use(express.json())
@@ -15,6 +21,7 @@ app
     .use(bodyParser.json())
     .use(cors())
     .use("/assets", express.static("./assets"))
+    .use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 /*--------------------------------------
             Les routes
@@ -23,7 +30,9 @@ app
 /*==========================================
             Users endPoint
 ===========================================*/
+ 
 require('../back_end/routes/register/Login')(app);
+
 require('../back_end/routes/register/Register')(app);
 require('../back_end/routes/users/piece/UserAjoutePieceIdentite')(app);
 require('../back_end/routes/users/imageuser/UserAjoutImageProfile')(app);

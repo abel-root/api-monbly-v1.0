@@ -58,7 +58,7 @@ const controllerRegister=async(req,res)=>{
        await User.create(userData).then(async(user) => {
             const message = 'Le compte utilisateur a été créé !';
             await Wallet.create({ userId: user.id, balance: 0 })
-            res.status(200).json({ message, donnees: user });
+            res.status(201).json({ message, donnees: user });
         }).catch((err) => {
             if (err instanceof ValidationError) {
                 return res.status(500).json({ message: err.message, donnees: err });
