@@ -24,7 +24,7 @@ module.exports = {
         }
       },
       profil: {
-        type: Sequelize.ENUM('voyageur','conducteur','admin'),
+        type: Sequelize.ENUM('voyageur','conducteur','admin',"superAdmin"),
         defaultValue:'voyageur'
       },
       email: {

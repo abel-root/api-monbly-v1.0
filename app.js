@@ -46,7 +46,10 @@ require('../back_end/routes/register/updateuserinfo')(app);
 require('../back_end/routes/register/deleteuser')(app);
 
 // update user password
-require('../back_end/routes/register/modifyPassword')(app)
+require('../back_end/routes/register/modifyPassword')(app);
+
+// Add admin user 
+require('../back_end/routes/register/adminCreateUser')(app);
 
 /*==========================================
             Trajet endPoint
@@ -57,7 +60,7 @@ require('../back_end/routes/trajets/conducteurCreerUntrajet/updatetrajet')(app);
 require('../back_end/routes/trajets/conducteurCreerUntrajet/recuperertrajet')(app);
 require('../back_end/routes/trajets/conducteurCreerUntrajet/recuperOnetrajetparconducteur')(app);
 require('../back_end/routes/trajets/conducteurCreerUntrajet/admin/admingetall')(app);
-require('../back_end/routes/trajets/UtilisateurPublieUntrajet/recupereeTousTrajetPublier')(app)
+require('../back_end/routes/trajets/UtilisateurPublieUntrajet/recupereeTousTrajetPublier')(app);
 
 /*==========================================
             Vehicule endPoint
@@ -97,12 +100,12 @@ require('../back_end/routes/tag/deleteTagg')(app);
 /*==========================================
             Avisuser endPoint
 ===========================================*/
-require('../back_end/routes/AvisSurConducteur/utilisaterFaitDonneAvisSurtrajet')(app)
-require('../back_end/routes/AvisSurConducteur/rendreVisibleUnAvis')(app)
-require('../back_end/routes/AvisSurConducteur/rendreUnAvisInVisible')(app)
-require('../back_end/routes/AvisSurConducteur/deleteUserAvis')(app)
-require('../back_end/routes/AvisSurConducteur/recupereeAvisVisible')(app)
-require('../back_end/routes/AvisSurConducteur/recupereeTousAvis')(app)
+require('../back_end/routes/AvisSurConducteur/utilisaterFaitDonneAvisSurtrajet')(app);
+require('../back_end/routes/AvisSurConducteur/rendreVisibleUnAvis')(app);
+require('../back_end/routes/AvisSurConducteur/rendreUnAvisInVisible')(app);
+require('../back_end/routes/AvisSurConducteur/deleteUserAvis')(app);
+require('../back_end/routes/AvisSurConducteur/recupereeAvisVisible')(app);
+require('../back_end/routes/AvisSurConducteur/recupereeTousAvis')(app);
 
 /*==========================================
             Paiement endPoint
