@@ -1,7 +1,7 @@
 const { User} = require('../../models');
 
 const adminCreateUserCTRL=async(req,res)=>{
-    const {adminId}=req.params;
+    const {userId}=req.params;
 try {
     const userData = {
         profil: req.body.profil,
@@ -10,9 +10,9 @@ try {
 
    await User.update(userData,{
     where: {
-        id: parseInt(adminId)
+        id: parseInt(userId)
     }
-    
+
    }).then(async(_) => {
         const message = 'Cet utilisateur est maintenant admin !';
         res.status(200).json({message});
