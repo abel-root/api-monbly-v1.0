@@ -1,4 +1,4 @@
-const {Vehicule}=require('../../models');
+const {Vehicule,Trajet}=require('../../models');
 const path = require('path');
 const fs = require('fs');
 const updatevehiculeControllers=async(req,res)=>{
@@ -8,8 +8,7 @@ const updatevehiculeControllers=async(req,res)=>{
     const vehiculeDa={
         modele:req.body.modele,
         immatriculation:req.body.immatriculation,
-        nb_places:parseInt(req.body.nb_places),
-        placesrestant:parseInt(req.body.nb_places)-parseInt(req.body.places_occupees)
+        nb_places:parseInt(req.body.nb_places)
     }
 
    // console.log(vehiculeDa)
@@ -38,7 +37,7 @@ const updatevehiculeControllers=async(req,res)=>{
         }
     }).then((_)=>{
         const message=`Mise à jour effectuée avec succès !`;
-        res.status(200).json({message,vehiculeDa});
+        res.status(200).json({message});
     }).catch((err)=>{
         const message=`Echec de mise à jour coté serveur!`;
         res.status(500).json({message,donnees:err});

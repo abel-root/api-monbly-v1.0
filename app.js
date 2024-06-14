@@ -44,6 +44,7 @@ require('../back_end/routes/register/admingetalluser')(app);
 require('../back_end/routes/register/admingetOneuser')(app);
 require('../back_end/routes/register/updateuserinfo')(app);
 require('../back_end/routes/register/deleteuser')(app);
+require('../back_end/routes/register/reinitialiserMotDePasseUser')(app);
 
 // update user password
 require('../back_end/routes/register/modifyPassword')(app);
