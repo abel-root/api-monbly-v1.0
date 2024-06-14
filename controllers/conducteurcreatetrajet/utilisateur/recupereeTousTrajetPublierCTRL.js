@@ -58,7 +58,7 @@ const recupereeTousTrajetPublierCTRL=async(req,res)=>{
             offset:offset
           }).then(({ count, rows })=>{
                 if(rows==null ){
-                    return res.status(400).json({message:"Aucun trajet n'a été trouvé dans la base de données",donnees:rows})
+                    return res.status(404).json({message:"Aucun trajet n'a été trouvé dans la base de données",donnees:rows})
                 }
                 if(depart.length>=2 || arrivee.length>=2 || place.length>=2 || date.length>=2){
                     const message=`Il y a ${count} ${count<2?"trajet trouvé":"trajets trouvés"}`

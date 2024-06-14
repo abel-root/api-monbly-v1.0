@@ -4,4 +4,4 @@ const recuperOnetrajetparconducteurControllers = require("../../../controllers/c
 const recuperOnetrajetparconducteur=(app)=>{
     app.get('/v1/:conducteurId/trajet/:id',auth,recuperOnetrajetparconducteurControllers)
 }
-module.exports=recuperOnetrajetparconducteur;
+module.exports=recuperOnetrajetparconducteur ; 

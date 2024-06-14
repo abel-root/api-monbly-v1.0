@@ -139,7 +139,7 @@ const swaggerOptions = {
                     }
                 },
                 security:{
-                    "api_key" : []
+                    "X-API-Key" : []
                 }
                     
                 
@@ -246,9 +246,9 @@ const swaggerOptions = {
             }
         },
         securitySchemes: {
-          api_key: {
+            "X-API-Key": {
             type: 'apiKey',
-            name: 'api_key',
+            name: 'X-API-Key',
             in: 'header',
           },
         },

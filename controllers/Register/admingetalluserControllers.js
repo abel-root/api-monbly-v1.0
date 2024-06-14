@@ -4,7 +4,7 @@ const admingetalluserControllers=async(req,res)=>{
     const name=req.query.name
     const limit=req.query.limit || 5
     const page = parseInt(req.query.page) || 1;
-    const offset = (page - 1) * limit;
+    const offset = (page - 1) * parseInt(limit);
     const sortBy = req.query.sortBy || 'ASC';
 
     if(name==null){

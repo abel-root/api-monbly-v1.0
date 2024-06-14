@@ -6,12 +6,12 @@ const conductercreattrajetController=async(req,res)=>{
      let montant;
 
         if (req.body.distance >0 && req.body.distance <= 50) {
-            montant = (req.body.distance * 16 <= req.body.montant && req.body.montant <= req.body.distance * 20);
+            montant = (req.body.distance *140 <= req.body.montant && req.body.montant <= req.body.distance * 180);
             if (!montant) {
                 return res.status(400).json({ message: `Le montant spécifié n'est pas dans la plage attendue pour la distance fournie (entre ${req.body.distance * 16} FCFA et ${req.body.distance * 20} FCFA).` });
             }
         } else if (req.body.distance > 50) {
-            montant = (req.body.distance * 140 <= req.body.montant && req.body.montant <= req.body.distance * 180);
+            montant = (req.body.distance * 16 <= req.body.montant && req.body.montant <= req.body.distance * 20);
             if (!montant) {
                 return res.status(400).json({ message: `Le montant spécifié n'est pas dans la plage attendue pour la distance fournie (entre ${req.body.distance * 140 } FCFA et ${req.body.distance * 180} FCFA).` });
             }
