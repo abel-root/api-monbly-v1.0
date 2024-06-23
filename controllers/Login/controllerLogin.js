@@ -23,13 +23,14 @@ const controllerLogin=async(req,res)=>{
                    userId: user.id,
                    profil: user.profil,
                    email:user.email,
-                   tels:user.tels
+                   tels:user.tels,
+                   
                  },
                  privateKey,
                  { expiresIn: '4h' }
                );
  
-               const message = `L'utilisateur a été connecté avec succès !`;
+               const message = `${user.genre=="homme"?"M.":user.genre=="Homme"?"M.":"Mme" } ${user.nom} Vous avez été connecté avec succès !`;
                return res.status(200).json({ message, access_token:token });
          })
      }).catch((error) => {

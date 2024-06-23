@@ -26,7 +26,7 @@ try {
             }
         });
         if (trajets && trajets.length > 0) {
-            const message = `La liste des réservations en attente a été récupérée avec succès !`;
+            const message = `La liste des trajets réservé a été récupérée avec succès !`;
             res.status(200).json({ message, donnees: reservations });
         } else {
             const message = `Aucun trajet trouvé correspondant à l'ID du conducteur fourni.`;

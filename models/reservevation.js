@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER,
     trajet_id: DataTypes.INTEGER,
     nombresPlace: DataTypes.INTEGER,
-    statut: DataTypes.ENUM("en_attente", "acceptee", "refusee"),
+    statut: DataTypes.ENUM("en_attente", "acceptee", "refusee","annulee"),
     redirection: DataTypes.ENUM("paiement", "liste_vehicules"),
     montantTotal:DataTypes.FLOAT
   }, {

@@ -82,6 +82,7 @@ require("../back_end/routes/reservations/voyageeurGetOneReservation")(app);
 require("../back_end/routes/reservations/conducteuerAccepteReservation")(app);
 require("../back_end/routes/reservations/conducteurRefuseReservation")(app);
 require("../back_end/routes/reservations/conducteurAfficherTousCestrajetReserve")(app);
+require("../back_end/routes/reservations/voyageurAnnuleUneReservation")(app);
 
 
 /*==========================================

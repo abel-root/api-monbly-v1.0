@@ -24,8 +24,9 @@ const recupereeTousTrajetPublierCTRL=async(req,res)=>{
             offset:offset,
             order:[['depart', sortBy], ['arrivee', sortBy], ['date', sortBy], ['heure', sortBy]]
 
-        }).then((trajets)=>{
+        }).then(async(trajets)=>{
             if(trajets){
+                
                 const message=`La liste des trajets a été recupéré avec succès !`
                 res.status(200).json({message,donnees:trajets})
             }else{
@@ -41,7 +42,7 @@ const recupereeTousTrajetPublierCTRL=async(req,res)=>{
             whereClause.depart = { [Op.like]: `%${depart}%` };
         }
         if (parseInt(place)) {
-            console.log(place);
+            //console.log(place);
             whereClause.place_restantes = { [Op.gte]: parseInt(place) };
         }
         if (date) {
