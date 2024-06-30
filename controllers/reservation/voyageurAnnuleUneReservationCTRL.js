@@ -25,6 +25,10 @@ const voyageurAnnuleUneReservationCTRL = async (req, res) => {
             return res.status(404).json({ message: "Échec de récupération de la réservation." });
         }
 
+        if(reservation.statut=="annulee"){
+            return res.status(400).json({message:"Cette reservation a déjà "})
+        }
+
         const trajet = await Trajet.findOne({
             where: {
                 id: reservation.trajet_id
@@ -81,7 +85,7 @@ const voyageurAnnuleUneReservationCTRL = async (req, res) => {
 
             paieToken = jwt.sign(
                 {
-                    Montant_a_rembourse_voyageur: reservation.montantTotal * refund,
+                    Montant_a_rembourser_voyageur: reservation.montantTotal * refund,
                     compensationConducteur: reservation.montantTotal * driverCompensation
                 },
                 privateKey,

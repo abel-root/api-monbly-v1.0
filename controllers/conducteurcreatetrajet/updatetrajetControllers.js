@@ -21,7 +21,7 @@ const updatetrajetControllers=async(req,res)=>{
       }
 
     let dateNow=req.body.date
-     dateNow=dateNow.split('/').join('-')
+    dateNow&& (dateNow=dateNow.split('/').join('-'))
      //console.log(dateNow);
 
      const trajetData = {
