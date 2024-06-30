@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const {Trajet}=require('../../../models')
+const {Trajet,ImageUser}=require('../../../models')
 const admingetallControllers=async(req,res)=>{
 
     const limit=parseInt(req.query.limit) || 5;
@@ -15,9 +15,13 @@ const admingetallControllers=async(req,res)=>{
                 offset:offset,
                 order:[['depart', sortBy], ['arrivee', sortBy], ['date', sortBy], ['heure', sortBy]]
         }
-            ).then((trajets)=>{
+            ).then(async(trajets)=>{
     
             if(trajets){
+                for(let trajet of trajets){
+                    let profilUser=await ImageUser.findByPk(trajet.userId);
+                    trajet.dataValues.profilUser = profilUser;
+                }
                 const message=`La liste des trajets a été recupéré avec succès !`
                 res.status(200).json({message,donnees:trajets})
             }else{
@@ -38,12 +42,16 @@ const admingetallControllers=async(req,res)=>{
             offset:offset,
             order:[['depart', sortBy], ['arrivee', sortBy], ['date', sortBy], ['heure', sortBy]]
 
-        }).then(({count, rows})=>{
+        }).then(async({count, rows})=>{
             if(!rows || rows.length === 0){
                 return res.status(404).json({message:"Aucun utilisateur trouvé dans la base de données",donnees:rows})
             }
 
             if(date.length>=1){
+                for(let trajet of rows){
+                    let profilUser=await ImageUser.findByPk(trajet.userId);
+                    trajet.dataValues.profilUser = profilUser;
+                }
                 const message=`Il y a ${count} ${count<2?"utilisateur trouvé":"utilisateurs trouvés"}`
                 res.status(200).json({message,donnees:rows})
             }else{

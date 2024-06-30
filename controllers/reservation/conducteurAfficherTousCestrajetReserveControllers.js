@@ -1,4 +1,4 @@
-const {Reservevation,Trajet}=require('../../models')
+const {Reservevation,Trajet,ImageUser}=require('../../models')
 const conducteurAfficherTousCestrajetReserveControllers=async(req,res)=>{
     const limit = parseInt(req.query.limit) || 5;
     const page = parseInt(req.query.page) || 1;
@@ -9,6 +9,7 @@ const conducteurAfficherTousCestrajetReserveControllers=async(req,res)=>{
     //let trajet=[];
 try {
     const reservations = await Reservevation.findAll({
+        include:["paiement","voyageur","trajet"],
         limit: limit,
         offset: offset,
         order: [["createdAt", sortBy]]
@@ -26,6 +27,15 @@ try {
             }
         });
         if (trajets && trajets.length > 0) {
+
+            for(let reservation of reservations){
+                let profilVoyageur=await ImageUser.findByPk(reservation.userId);
+                reservation.dataValues.profilVoyageur = profilVoyageur;
+
+                let profilConducteur=await ImageUser.findByPk(reservation.trajet.userId);
+                reservation.dataValues.profilConducteur = profilConducteur;
+            }
+
             const message = `La liste des trajets réservé a été récupérée avec succès !`;
             res.status(200).json({ message, donnees: reservations });
         } else {

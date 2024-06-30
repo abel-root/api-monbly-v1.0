@@ -1,4 +1,4 @@
-const {Reservevation,Trajet}=require('../../models');
+const {Reservevation,Trajet,ImageUser}=require('../../models');
 const afficherTousLesReservationsEnAttenteControllers=async(req,res)=>{
     const limit = parseInt(req.query.limit) || 5;
     const page = parseInt(req.query.page) || 1;
@@ -8,7 +8,7 @@ const afficherTousLesReservationsEnAttenteControllers=async(req,res)=>{
 
     try {
         const reservations = await Reservevation.findAll({
-            include:["paiement"],
+            include:["paiement","voyageur","trajet"],
             where: {
                 statut: "en_attente"
             },
@@ -25,6 +25,14 @@ const afficherTousLesReservationsEnAttenteControllers=async(req,res)=>{
                     userId: parseInt(conducteurId)
                 }
             });
+
+            for(let reservation of reservations){
+                let profilVoyageur=await ImageUser.findByPk(reservation.userId);
+                reservation.dataValues.profilVoyageur = profilVoyageur;
+
+                let profilConducteur=await ImageUser.findByPk(reservation.trajet.userId);
+                reservation.dataValues.profilConducteur = profilConducteur;
+            }
     
             if (trajets && trajets.length > 0) {
                 const message = `La liste des réservations en attente a été récupérée avec succès !`;

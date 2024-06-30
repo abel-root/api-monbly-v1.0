@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const {Trajet}=require('../../models');
+const {Trajet,ImageUser}=require('../../models');
 const recuperertrajetControllers=async(req,res)=>{
     const arrivee=req.query.arrivee;
     const heure=req.query.heure;
@@ -13,6 +13,12 @@ const recuperertrajetControllers=async(req,res)=>{
     const {conducteurId}=req.params;
     const offset=( page - 1 ) * limit;
     //console.log(heure,date)
+    let profilUser=await ImageUser.findOne({
+        where:{
+            userId: parseInt(conducteurId)
+        }
+    });
+
     let whereClause = {};
     
     if(depart==null && arrivee==null && heure==null && date==null){
@@ -27,6 +33,9 @@ const recuperertrajetControllers=async(req,res)=>{
 
         }).then((trajets)=>{
             if(trajets){
+                for(let trajet of trajets){
+                    trajet.dataValues.profilUser = profilUser;
+                }
                 const message=`La liste des trajets a été recupéré avec succès !`
                 res.status(200).json({message,donnees:trajets})
             }else{
@@ -64,6 +73,9 @@ const recuperertrajetControllers=async(req,res)=>{
                 }
 
                 if(depart.length>=2 || arrivee.length>=2 || heure.length>=2 || date.length>=2){
+                    for(let trajet of rows){
+                        trajet.dataValues.profilUser = profilUser;
+                    }
                     const message=`Il y a ${count} ${count<2?"trajet trouvé":"trajets trouvés"}`
                     res.status(200).json({message,donnees:rows})
                 }else{

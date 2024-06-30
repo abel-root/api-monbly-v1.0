@@ -1,4 +1,4 @@
-const {Vehicule}=require('../../models');
+const {Vehicule,ImageUser}=require('../../models');
 const recuperertoutleesvehiculesControllers=async(req,res)=>{
 const {conducteurId}=req.params;
 const limit=parseInt(req.query.limit) || 5;
@@ -7,14 +7,21 @@ const offset=(page-1)*limit;
 const sortBy=req.query.sortBy || "ASC"
 
     await Vehicule.findAll({
+        include:["trajet","user"],
         where:{
             userId:parseInt(conducteurId)
         },
         limit:limit,
         offset:offset,
         order:[["modele",sortBy]]
-    }).then((vehicule)=>{
+    }).then(async(vehicule)=>{
         if(vehicule){
+            for(let reservation of vehicule){
+
+                let profilConducteur=await ImageUser.findByPk(reservation.userId);
+                reservation.dataValues.profilConducteur = profilConducteur;
+            }
+
             const message=`La liste des véhicules a été recupéré avec succès !`;
             res.status(200).json({message,donnees:vehicule});
         }else{
